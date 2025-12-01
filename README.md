@@ -75,17 +75,56 @@ Compare the original modulating signal with the demodulated signal. PROCEDURE
 •	Verify the generated waveform using Tabulation and Model Waveform
 
 Program
+Ac = 13.2;
+Am = 6.6;
+Fc = 36000;
+Fm = 360;
+Fs = 3600;
+t = 0:1/Fs:2/Fm;
+e1 = (Ac*sin(2*3.14*Fm*t));
+subplot(4,1,1);
+plot(t,e1);
+xgrid;
+title('Message Signal');
+xlabel('Time');
+ylabel('Amplitude');
 
+e2 = (Ac*sin(2*3.14*Fc*t));
+subplot(4,1,2);
+plot(t,e2);
+xgrid;
+title('Carrier Signal');
+xlabel('Time');
+ylabel('Amplitude');
+
+e3 = (Ac + (Am*sin(2*3.14*Fm*t))).*sin(2*3.14*Fc*t);
+subplot(4,1,3);
+plot(t,e3);
+xgrid;
+title('AM Modulated Signal');
+xlabel('Time');
+ylabel('Amplitude');
+
+demodulated_signal = abs(hilbert(e3)) - Ac;
+subplot(4,1,4);
+plot(t,demodulated_signal);
+xgrid;
+title('Demodulated Signal');
+xlabel('Time');
+ylabel('Amplitude');
 
 
 Output Waveform
 
+![WhatsApp Image 2025-12-01 at 15 41 11_4f716796](https://github.com/user-attachments/assets/6fa1b584-8d12-4570-a838-783365fbc571)
 
 
 
 
 TABULATION:
+![WhatsApp Image 2025-12-01 at 15 42 20_68276819](https://github.com/user-attachments/assets/43286674-a913-45d6-87d5-fe1268485955)
 
+![WhatsApp Image 2025-12-01 at 15 42 43_554727f6](https://github.com/user-attachments/assets/76d2bac9-8b5d-4cac-a55e-739d98e15ec4)
 
 
 Calculation
